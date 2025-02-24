@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
-import '../../domain/entities/dto/location_dto.dart';
-import '../../domain/entities/dto/weather_forecast_dto.dart';
 import '../../utilities/constants.dart';
+import '../dto/location_dto.dart';
+import '../dto/weather_forecast_dto.dart';
 
 @singleton
 class WeatherDataSource {
@@ -20,7 +20,7 @@ class WeatherDataSource {
 
   WeatherDataSource();
 
-  Future<WeatherForecastDto?> getForecastByCityName(String cityName) async {
+  Future<WeatherForecastDto> getForecastByCityName(String cityName) async {
 
     final parameters = {
       _appIdKey: _apiKey,
@@ -32,7 +32,7 @@ class WeatherDataSource {
     return _sendResponse(parameters);
   }
 
-  Future<WeatherForecastDto?> getForecastByLocation(LocationDto location) async {
+  Future<WeatherForecastDto> getForecastByLocation(LocationDto location) async {
 
     final parameters = {
       _appIdKey: _apiKey,
@@ -45,7 +45,7 @@ class WeatherDataSource {
     return _sendResponse(parameters);
   }
 
-  Future<WeatherForecastDto?> _sendResponse(Map<String, String>? parameters) async {
+  Future<WeatherForecastDto> _sendResponse(Map<String, String>? parameters) async {
     final uri = Uri.https(
       _baseUrl,
       _forecastPath,
@@ -57,7 +57,7 @@ class WeatherDataSource {
     if (response.statusCode == 200) {
       return WeatherForecastDto.fromJson(json.decode(response.body));
     } else {
-      return Future.error('Error response');
+      throw Exception("Response result ${response.statusCode}");
     }
   }
 }

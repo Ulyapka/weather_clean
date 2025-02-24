@@ -23,16 +23,12 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     on<WeatherLoadEvent>((event, emit) async {
       emit(WeatherLoadingState());
       try {
-        final CurrentWeather? currentWeather = await getWeatherUseCase.getWeather(event.cityName);
+        final CurrentWeather currentWeather = await getWeatherUseCase.getWeather(event.cityName);
 
-        if(currentWeather != null) {
-          emit(WeatherLoadedState(loadedWeather: currentWeather));
-        }
-        else {
-          emit(WeatherEmptyState());
-        }
-      } catch (_) {
-        emit(WeatherErrorState());
+        emit(WeatherLoadedState(loadedWeather: currentWeather));
+      }
+      catch (e) {
+        emit(WeatherErrorState(message: e.toString()));
       }
     });
   }

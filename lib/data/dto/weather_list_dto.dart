@@ -1,5 +1,5 @@
-import 'package:weather_clean/domain/entities/dto/temp_dto.dart';
-import 'package:weather_clean/domain/entities/dto/weather_dto.dart';
+import 'package:weather_clean/data/dto/temp_dto.dart';
+import 'package:weather_clean/data/dto/weather_dto.dart';
 
 import '../../../utilities/constants.dart';
 import 'feels_like_dto.dart';

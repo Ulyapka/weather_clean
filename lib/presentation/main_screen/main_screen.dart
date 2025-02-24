@@ -115,9 +115,8 @@ class _Content extends StatelessWidget {
           );
         }
         else if (state is WeatherErrorState) {
-          return const Center(
-            child: Text(
-                'Ошибочка вышла =(\nНаверное вы не ввели название города\nили оно введено неверно...'),
+          return Center(
+            child: Text('Ошибочка вышла... "Код ошибки ${state.message}"'),
           );
         }
         else if (state is WeatherEmptyState) {

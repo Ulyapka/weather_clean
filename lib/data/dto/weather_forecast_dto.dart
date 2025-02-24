@@ -1,4 +1,4 @@
-import 'package:weather_clean/domain/entities/dto/weather_list_dto.dart';
+import 'package:weather_clean/data/dto/weather_list_dto.dart';
 
 import 'city_dto.dart';
 

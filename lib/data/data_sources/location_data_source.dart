@@ -1,6 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:injectable/injectable.dart';
-import 'package:weather_clean/domain/entities/dto/location_dto.dart';
+
+import '../dto/location_dto.dart';
 
 @singleton
 class LocationDataSource {

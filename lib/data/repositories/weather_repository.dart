@@ -10,32 +10,15 @@ class WeatherRepository {
 
   WeatherRepository(this.weatherDataSource, this.locationDataSource);
 
-  Future<CurrentWeather?> getWeatherByName(String cityName) async {
-    try {
-      final dto = await weatherDataSource.getForecastByCityName(cityName);
+  Future<CurrentWeather> getWeatherByName(String cityName) async {
+    final dto = await weatherDataSource.getForecastByCityName(cityName);
 
-      if(dto != null) {
-        return CurrentWeather.fromDto(dto);
-      }
-    }
-    catch (e) {
-      print(e.toString());
-    }
-    return null;
+    return CurrentWeather.fromDto(dto);
   }
 
-  Future<CurrentWeather?> getWeatherByLocation() async {
-    try {
-      final location = await locationDataSource.getCurrentLocation();
-      final dto = await weatherDataSource.getForecastByLocation(location);
-
-      if(dto != null) {
-        return CurrentWeather.fromDto(dto);
-      }
-    }
-    catch (e) {
-      print(e.toString());
-    }
-    return null;
+  Future<CurrentWeather> getWeatherByLocation() async {
+    final location = await locationDataSource.getCurrentLocation();
+    final dto = await weatherDataSource.getForecastByLocation(location);
+    return CurrentWeather.fromDto(dto);
   }
 }

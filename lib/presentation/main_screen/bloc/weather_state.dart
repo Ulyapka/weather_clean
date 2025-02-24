@@ -12,4 +12,11 @@ class WeatherLoadedState extends WeatherState {
 }
 
 class WeatherEmptyState extends WeatherState {}
-class WeatherErrorState extends WeatherState {}
+
+class WeatherErrorState extends WeatherState {
+  final String message;
+
+  WeatherErrorState({
+    required this.message,
+  });
+}

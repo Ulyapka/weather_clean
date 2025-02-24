@@ -1,4 +1,6 @@
-import 'package:weather_clean/domain/entities/dto/weather_forecast_dto.dart';
+
+
+import '../../data/dto/weather_forecast_dto.dart';
 
 class CurrentWeather {
   final String cityName;

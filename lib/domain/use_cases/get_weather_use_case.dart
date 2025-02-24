@@ -8,7 +8,7 @@ class GetWeatherUseCase {
 
   GetWeatherUseCase(this._weatherRepository);
 
-  Future<CurrentWeather?> getWeather(String? cityName) {
+  Future<CurrentWeather> getWeather(String? cityName) {
     if(cityName == null || cityName.isEmpty) {
       return _weatherRepository.getWeatherByLocation();
     }
