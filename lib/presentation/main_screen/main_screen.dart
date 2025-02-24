@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../dependency_injection/injection.dart';
 import 'bloc/weather_bloc.dart';
-import 'bloc/weather_event.dart';
 import 'bloc/weather_state.dart';
 
 class MainScreen extends StatelessWidget {
@@ -13,16 +11,13 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final WeatherBloc weatherBloc = BlocProvider.of<WeatherBloc>(context);
 
-    return BlocProvider<WeatherBloc>(
-      create: (context) => getIt.get<WeatherBloc>(),
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: [
-              _InputField(bloc: weatherBloc),
-              _Content(),
-            ],
-          ),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            _InputField(bloc: weatherBloc),
+            _Content(bloc: weatherBloc),
+          ],
         ),
       ),
     );
@@ -66,34 +61,35 @@ class _InputField extends StatelessWidget {
             size: 50.0,
           ),
         ),
-        onChanged: (value) {
-          bloc.add(WeatherLoadEvent(cityName: value));
-        },
+        onChanged: bloc.setCityName,
       ),
     );
   }
 }
 
 class _Content extends StatelessWidget {
-  const _Content();
+  final WeatherBloc bloc;
+
+  const _Content({required this.bloc});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WeatherBloc, WeatherState>(
+      bloc: bloc,
       builder: (context, state) {
         if (state is WeatherLoadedState) {
           return Center(
             child: Column(
               children: [
                 Text(
-                  '${state.loadedWeather.city?.name}',
+                  state.loadedWeather.cityName,
                   style: const TextStyle(
                     fontSize: 40.0,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
                 Text(
-                  '${state.loadedWeather.list?[0].temp?.day?.ceil()}ºC'
+                  '${state.loadedWeather.temp}ºC'
                       .toUpperCase(),
                   style: const TextStyle(
                     fontSize: 50.0,
@@ -101,7 +97,7 @@ class _Content extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${state.loadedWeather.list?[0].weather![0].description}'
+                  state.loadedWeather.description
                       .toUpperCase(),
                   style: const TextStyle(
                       fontSize: 40.0,

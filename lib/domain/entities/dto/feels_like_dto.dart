@@ -1,17 +1,17 @@
-class FeelsLike {
+class FeelsLikeDto {
   num? day;
   num? night;
   num? eve;
   num? morn;
 
-  FeelsLike({
+  FeelsLikeDto({
     this.day,
     this.night,
     this.eve,
     this.morn,
   });
 
-  FeelsLike.fromJson(Map<String, dynamic> json) {
+  FeelsLikeDto.fromJson(Map<String, dynamic> json) {
     day = json['day'];
     night = json['night'];
     eve = json['eve'];

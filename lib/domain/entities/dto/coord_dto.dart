@@ -1,10 +1,10 @@
-class Coord {
+class CoordDto {
   num? lon;
   num? lat;
 
-  Coord({this.lon, this.lat});
+  CoordDto({this.lon, this.lat});
 
-  Coord.fromJson(Map<String, dynamic> json) {
+  CoordDto.fromJson(Map<String, dynamic> json) {
     lon = json['lon'];
     lat = json['lat'];
   }

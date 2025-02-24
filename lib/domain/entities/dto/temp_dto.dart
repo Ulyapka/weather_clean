@@ -1,4 +1,4 @@
-class Temp {
+class TempDto {
   double? day;
   double? min;
   double? max;
@@ -6,7 +6,7 @@ class Temp {
   double? eve;
   double? morn;
 
-  Temp({
+  TempDto({
     this.day,
     this.min,
     this.max,
@@ -15,7 +15,7 @@ class Temp {
     this.morn,
   });
 
-  Temp.fromJson(Map<String, dynamic> json) {
+  TempDto.fromJson(Map<String, dynamic> json) {
     day = json['day'].toDouble();
     min = json['min'].toDouble();
     max = json['max'].toDouble();

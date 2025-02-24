@@ -1,15 +1,15 @@
-import 'package:weather_clean/domain/entities/weather_list.dart';
+import 'package:weather_clean/domain/entities/dto/weather_list_dto.dart';
 
-import 'city.dart';
+import 'city_dto.dart';
 
-class WeatherForecast {
-  City? city;
+class WeatherForecastDto {
+  CityDto? city;
   String? cod;
   num? message;
   num? cnt;
-  List<WeatherList>? list;
+  List<WeatherListDto>? list;
 
-  WeatherForecast({
+  WeatherForecastDto({
     this.city,
     this.cod,
     this.message,
@@ -17,15 +17,15 @@ class WeatherForecast {
     this.list,
   });
 
-  WeatherForecast.fromJson(Map<String, dynamic> json) {
-    city = json['city'] != null ? City.fromJson(json['city']) : null;
+  WeatherForecastDto.fromJson(Map<String, dynamic> json) {
+    city = json['city'] != null ? CityDto.fromJson(json['city']) : null;
     cod = json['cod'];
     message = json['message'];
     cnt = json['cnt'];
     if (json['list'] != null) {
-      list = <WeatherList>[];
+      list = <WeatherListDto>[];
       json['list'].forEach((v) {
-        list!.add(WeatherList.fromJson(v));
+        list!.add(WeatherListDto.fromJson(v));
       });
     }
   }

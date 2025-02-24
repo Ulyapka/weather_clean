@@ -1,18 +1,18 @@
-import 'package:weather_clean/domain/entities/temp.dart';
-import 'package:weather_clean/domain/entities/weather.dart';
+import 'package:weather_clean/domain/entities/dto/temp_dto.dart';
+import 'package:weather_clean/domain/entities/dto/weather_dto.dart';
 
-import '../../utilities/constants.dart';
-import 'feels_like.dart';
+import '../../../utilities/constants.dart';
+import 'feels_like_dto.dart';
 
-class WeatherList {
+class WeatherListDto {
   num? dt;
   num? sunrise;
   num? sunset;
-  Temp? temp;
-  FeelsLike? feelsLike;
+  TempDto? temp;
+  FeelsLikeDto? feelsLike;
   num? pressure;
   int? humidity;
-  List<Weather>? weather;
+  List<WeatherDto>? weather;
   num? speed;
   num? deg;
   num? gust;
@@ -20,7 +20,7 @@ class WeatherList {
   num? pop;
   num? rain;
 
-  WeatherList({
+  WeatherListDto({
     this.dt,
     this.sunrise,
     this.sunset,
@@ -37,18 +37,18 @@ class WeatherList {
     this.rain,
   });
 
-  WeatherList.fromJson(Map<String, dynamic> json) {
+  WeatherListDto.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
     sunrise = json['sunrise'];
     sunset = json['sunset'];
-    temp = json['temp'] != null ? Temp.fromJson(json['temp']) : null;
-    feelsLike = json['feels_like'] != null ? FeelsLike.fromJson(json['feels_like']) : null;
+    temp = json['temp'] != null ? TempDto.fromJson(json['temp']) : null;
+    feelsLike = json['feels_like'] != null ? FeelsLikeDto.fromJson(json['feels_like']) : null;
     pressure = json['pressure'];
     humidity = json['humidity'];
     if (json['weather'] != null) {
-      weather = <Weather>[];
+      weather = <WeatherDto>[];
       json['weather'].forEach((v) {
-        weather!.add(Weather.fromJson(v));
+        weather!.add(WeatherDto.fromJson(v));
       });
     }
     speed = json['speed'];

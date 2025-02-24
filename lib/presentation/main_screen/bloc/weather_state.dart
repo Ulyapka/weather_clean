@@ -1,11 +1,11 @@
-import '../../../domain/entities/weather_forecast.dart';
+import 'package:weather_clean/domain/entities/current_weather.dart';
 
 abstract class WeatherState {}
 
 class WeatherLoadingState extends WeatherState {}
 
 class WeatherLoadedState extends WeatherState {
-  WeatherForecast loadedWeather;
+  CurrentWeather loadedWeather;
   WeatherLoadedState({
     required this.loadedWeather,
   });

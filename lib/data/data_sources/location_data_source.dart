@@ -1,8 +1,10 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:weather_clean/domain/entities/location.dart';
+import 'package:injectable/injectable.dart';
+import 'package:weather_clean/domain/entities/dto/location_dto.dart';
 
-class GetLocationUseCase {
-  Future<Location?> getCurrentLocation() async {
+@singleton
+class LocationDataSource {
+  Future<LocationDto> getCurrentLocation() async {
     try {
       final permission = await Geolocator.checkPermission();
       if(permission != LocationPermission.always || permission != LocationPermission.whileInUse) {
@@ -10,9 +12,9 @@ class GetLocationUseCase {
       }
       Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
 
-      return Location(position.latitude, position.longitude);
+      return LocationDto(position.latitude, position.longitude);
     } catch (e) {
-      return null;
+      return Future.error(e);
     }
   }
 }

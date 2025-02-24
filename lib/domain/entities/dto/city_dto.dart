@@ -1,15 +1,15 @@
 
-import 'coord.dart';
+import 'coord_dto.dart';
 
-class City {
+class CityDto {
   num? id;
   String? name;
-  Coord? coord;
+  CoordDto? coord;
   String? country;
   num? population;
   num? timezone;
 
-  City({
+  CityDto({
     this.id,
     this.name,
     this.coord,
@@ -18,10 +18,10 @@ class City {
     this.timezone,
   });
 
-  City.fromJson(Map<String, dynamic> json) {
+  CityDto.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    coord = json['coord'] != null ? Coord.fromJson(json['coord']) : null;
+    coord = json['coord'] != null ? CoordDto.fromJson(json['coord']) : null;
     country = json['country'];
     population = json['population'];
     timezone = json['timezone'];
